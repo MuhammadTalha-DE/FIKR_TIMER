@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Fikr Timer — Offline</title>
+    <meta name="theme-color" content="#7c5ce7">
+    <style>
+        :root {
+            --bg: #0b0b1a;
+            --surface: rgba(20,20,40,0.7);
+            --text: #f0f0ff;
+            --text-secondary: #b0b0d0;
+            --primary: #7c5ce7;
+            --primary-glow: 0 0 30px rgba(124,92,231,0.5);
+            --border: rgba(255,255,255,0.08);
+            --radius: 24px;
+            --transition: 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        [data-theme="light"] {
+            --bg: #f4f4ff;
+            --surface: rgba(255,255,255,0.8);
+            --text: #1a1a2e;
+            --text-secondary: #4a4a6a;
+            --primary: #5a3ec8;
+            --primary-glow: 0 0 20px rgba(90,62,200,0.4);
+            --border: rgba(0,0,0,0.08);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            min-height: 100dvh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s, color 0.3s;
+            -webkit-tap-highlight-color: transparent;
+            user-select: none;
+            padding: 20px;
+        }
+
+        .offline-container {
+            text-align: center;
+            max-width: 420px;
+            width: 100%;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .offline-icon {
+            font-size: 6rem;
+            display: block;
+            margin-bottom: 20px;
+            animation: float 3s infinite ease-in-out;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-15px);
+            }
+        }
+
+        .offline-title {
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin-bottom: 8px;
+            background: linear-gradient(135deg, var(--primary), #c084fc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .offline-subtitle {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            margin-bottom: 32px;
+            line-height: 1.5;
+        }
+
+        .offline-card {
+            background: var(--surface);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 24px;
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .offline-card h3 {
+            font-size: 1rem;
+            margin-bottom: 12px;
+            color: var(--primary);
+        }
+
+        .offline-features {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .offline-features li {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .offline-features li .feature-icon {
+            font-size: 1.2rem;
+            width: 28px;
+            text-align: center;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 14px 28px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            border: none;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            font-family: inherit;
+            width: 100%;
+            max-width: 300px;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            box-shadow: var(--primary-glow);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 40px rgba(124,92,231,0.7);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--text);
+            margin-top: 12px;
+        }
+
+        .btn-outline:hover {
+            background: rgba(255,255,255,0.05);
+            border-color: var(--primary);
+        }
+
+        .offline-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(248, 113, 113, 0.15);
+            color: #f87171;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            margin-bottom: 20px;
+        }
+
+        .offline-dot {
+            width: 8px;
+            height: 8px;
+            background: #f87171;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.3;
+            }
+        }
+
+        .version-text {
+            font-size: 0.7rem;
+            color: var(--text-secondary);
+            opacity: 0.6;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="offline-container">
+        <!-- Status Badge -->
+        <div class="offline-status">
+            <span class="offline-dot"></span>
+            You are offline
+        </div>
+
+        <!-- Main Icon -->
+        <span class="offline-icon">⏳</span>
+
+        <!-- Title -->
+        <h1 class="offline-title">Fikr Timer</h1>
+        <p class="offline-subtitle">
+            You're not connected to the internet, but don't worry — 
+            Fikr Timer works fully offline!
+        </p>
+
+        <!-- What's Available Offline Card -->
+        <div class="offline-card">
+            <h3>✅ Available Offline</h3>
+            <ul class="offline-features">
+                <li>
+                    <span class="feature-icon">🍅</span>
+                    <span>Pomodoro Timer</span>
+                </li>
+                <li>
+                    <span class="feature-icon">🧘</span>
+                    <span>Breathing Exercises</span>
+                </li>
+                <li>
+                    <span class="feature-icon">💪</span>
+                    <span>Workout Modes</span>
+                </li>
+                <li>
+                    <span class="feature-icon">📊</span>
+                    <span>Session History & Analytics</span>
+                </li>
+                <li>
+                    <span class="feature-icon">🎧</span>
+                    <span>Soundscapes & Alerts</span>
+                </li>
+                <li>
+                    <span class="feature-icon">🌓</span>
+                    <span>Dark/Light Theme</span>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Action Buttons -->
+        <button class="btn btn-primary" onclick="retryConnection()">
+            🔄 Try Again
+        </button>
+        <button class="btn btn-outline" onclick="openCachedApp()">
+            📱 Open Cached App
+        </button>
+
+        <!-- Version -->
+        <p class="version-text">Fikr Timer v3.0 · Offline Mode</p>
+    </div>
+
+    <script>
+        /**
+         * Fikr Timer · Offline Page Logic
+         * Handles reconnection attempts and cached app access
+         */
+
+        // Check if we're back online every 5 seconds
+        let checkInterval;
+
+        function startOnlineCheck() {
+            checkInterval = setInterval(() => {
+                if (navigator.onLine) {
+                    clearInterval(checkInterval);
+                    // We're back online! Redirect to main app
+                    window.location.href = '/';
+                }
+            }, 5000);
+        }
+
+        function retryConnection() {
+            // Show feedback
+            const btn = document.querySelector('.btn-primary');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '⏳ Checking...';
+            btn.disabled = true;
+
+            // Try to fetch the main page
+            fetch('/')
+                .then(response => {
+                    if (response.ok) {
+                        // We're online! Redirect
+                        window.location.href = '/';
+                    } else {
+                        // Still offline
+                        btn.innerHTML = originalText;
+                        btn.disabled = false;
+                        showOfflineToast();
+                    }
+                })
+                .catch(() => {
+                    // Still offline
+                    btn.innerHTML = originalText;
+                    btn.disabled = false;
+                    showOfflineToast();
+                });
+        }
+
+        function openCachedApp() {
+            // Try to open the cached version from service worker
+            if ('caches' in window) {
+                caches.match('/index.html')
+                    .then(response => {
+                        if (response) {
+                            window.location.href = '/index.html';
+                        } else {
+                            showOfflineToast('No cached version available yet. Connect once to cache the app.');
+                        }
+                    })
+                    .catch(() => {
+                        showOfflineToast('Could not load cached app.');
+                    });
+            } else {
+                // Try anyway
+                window.location.href = '/';
+            }
+        }
+
+        function showOfflineToast(message) {
+            const toast = document.createElement('div');
+            toast.textContent = message || 'Still offline. Please check your connection.';
+            toast.style.cssText = `
+                position: fixed;
+                bottom: 30px;
+                left: 50%;
+                transform: translateX(-50%);
+                background: #f87171;
+                color: white;
+                padding: 12px 24px;
+                border-radius: 30px;
+                font-size: 0.9rem;
+                font-weight: 500;
+                z-index: 999;
+                animation: fadeIn 0.3s ease;
+            `;
+            document.body.appendChild(toast);
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                toast.style.transition = 'opacity 0.3s';
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
+
+        // Listen for online event
+        window.addEventListener('online', () => {
+            // We're back online!
+            window.location.href = '/';
+        });
+
+        // Update status if we come back online
+        window.addEventListener('offline', () => {
+            const statusBadge = document.querySelector('.offline-status');
+            if (statusBadge) {
+                statusBadge.querySelector('span:last-child').textContent = 'You are offline';
+            }
+        });
+
+        // Start checking
+        startOnlineCheck();
+
+        // Listen for service worker messages
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.addEventListener('message', (event) => {
+                if (event.data === 'online') {
+                    window.location.href = '/';
+                }
+            });
+        }
+    </script>
+</body>
+</html>
