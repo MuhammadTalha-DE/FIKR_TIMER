@@ -1,0 +1,166 @@
+/* ============================================================
+   Fikr Timer · Animations
+   Keyframes, transitions, breathing effects, particles
+   ============================================================ */
+
+/* ---------- FADE IN ---------- */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeOut {
+    from { opacity: 1; transform: translateY(0); }
+    to   { opacity: 0; transform: translateY(10px); }
+}
+
+/* ---------- PULSE ---------- */
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50%      { transform: scale(1.05); }
+}
+
+.pulse {
+    animation: pulse 2s infinite ease-in-out;
+}
+
+/* ---------- BREATHING ANIMATIONS ---------- */
+.timer-circle {
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.timer-circle.breathing-inhale {
+    transform: scale(1.12);
+}
+
+.timer-circle.breathing-exhale {
+    transform: scale(0.92);
+}
+
+.timer-circle.breathing-hold {
+    transform: scale(1);
+}
+
+/* ---------- BREATHING RING ---------- */
+.breathing-ring {
+    fill: none;
+    stroke: var(--primary);
+    stroke-width: 3;
+    opacity: 0;
+    transition: r 0.8s cubic-bezier(0.4, 0, 0.2, 1),
+                opacity 0.4s ease;
+}
+
+.breathing-ring.inhale {
+    r: 85;
+    opacity: 0.5;
+}
+
+.breathing-ring.exhale {
+    r: 35;
+    opacity: 0.15;
+}
+
+.breathing-ring.hold {
+    r: 55;
+    opacity: 0.25;
+}
+
+/* ---------- PARTICLES ---------- */
+@keyframes particleFloat {
+    0%   { transform: translateY(0) scale(1); opacity: 0.6; }
+    50%  { transform: translateY(-20px) scale(1.3); opacity: 1; }
+    100% { transform: translateY(-40px) scale(0.8); opacity: 0; }
+}
+
+@keyframes particleSink {
+    0%   { transform: translateY(0) scale(1); opacity: 0.6; }
+    50%  { transform: translateY(20px) scale(1.3); opacity: 1; }
+    100% { transform: translateY(40px) scale(0.8); opacity: 0; }
+}
+
+/* ---------- SLIDE IN ---------- */
+@keyframes slideInUp {
+    from { transform: translateY(30px); opacity: 0; }
+    to   { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes slideInDown {
+    from { transform: translateY(-30px); opacity: 0; }
+    to   { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes slideInRight {
+    from { transform: translateX(30px); opacity: 0; }
+    to   { transform: translateX(0); opacity: 1; }
+}
+
+/* ---------- ROTATE ---------- */
+@keyframes rotate {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+}
+
+/* ---------- GLOW PULSE ---------- */
+@keyframes glowPulse {
+    0%, 100% { box-shadow: var(--primary-glow); }
+    50%      { box-shadow: var(--primary-glow-intense); }
+}
+
+.glow-pulse {
+    animation: glowPulse 2s infinite ease-in-out;
+}
+
+/* ---------- MODAL ANIMATIONS ---------- */
+@keyframes modalIn {
+    from { opacity: 0; transform: scale(0.9) translateY(20px); }
+    to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+@keyframes modalOut {
+    from { opacity: 1; transform: scale(1) translateY(0); }
+    to   { opacity: 0; transform: scale(0.9) translateY(20px); }
+}
+
+.modal-overlay.active .modal-content {
+    animation: modalIn 0.3s ease forwards;
+}
+
+.modal-overlay.closing .modal-content {
+    animation: modalOut 0.3s ease forwards;
+}
+
+/* ---------- TOAST ---------- */
+@keyframes toastIn {
+    from { transform: translateX(100%); opacity: 0; }
+    to   { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes toastOut {
+    from { transform: translateX(0); opacity: 1; }
+    to   { transform: translateX(100%); opacity: 0; }
+}
+
+/* ---------- PROGRESS BAR ---------- */
+@keyframes progressFill {
+    from { stroke-dashoffset: 565.5; }
+}
+
+/* ---------- CARD HOVER ---------- */
+.mode-card {
+    transition: all var(--transition);
+}
+
+.mode-card:hover {
+    transform: translateY(-5px) scale(1.02);
+}
+
+/* ---------- 3D CARD EFFECT ---------- */
+.card-3d {
+    transform-style: preserve-3d;
+    perspective: 1000px;
+}
+
+.card-3d:hover {
+    transform: rotateY(3deg) rotateX(2deg);
+}

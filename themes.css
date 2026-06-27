@@ -1,0 +1,87 @@
+/* ============================================================
+   Fikr Timer · Theme System
+   Dark/light mode, color palettes, CSS custom properties
+   ============================================================ */
+
+/* ---------- DARK THEME (default) ---------- */
+:root,
+[data-theme="dark"] {
+    --bg: #0b0b1a;
+    --bg-gradient: linear-gradient(135deg, #0b0b1a 0%, #1a1030 50%, #0f0f2a 100%);
+    --surface: rgba(20, 20, 40, 0.75);
+    --surface2: rgba(35, 35, 60, 0.9);
+    --text: #f0f0ff;
+    --text-secondary: #b0b0d0;
+    --text-muted: #6a6a8a;
+    --primary: #7c5ce7;
+    --primary-light: #a78bfa;
+    --primary-dark: #5a3ec8;
+    --primary-glow: 0 0 30px rgba(124, 92, 231, 0.5);
+    --primary-glow-intense: 0 0 60px rgba(124, 92, 231, 0.8);
+    --secondary: #c084fc;
+    --danger: #f87171;
+    --danger-glow: 0 0 20px rgba(248, 113, 113, 0.4);
+    --success: #4ade80;
+    --success-glow: 0 0 20px rgba(74, 222, 128, 0.4);
+    --warning: #fbbf24;
+    --border: rgba(255, 255, 255, 0.08);
+    --border-hover: rgba(255, 255, 255, 0.15);
+    --shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    --shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.6);
+    --glass-bg: rgba(255, 255, 255, 0.04);
+    --glass-bg-hover: rgba(255, 255, 255, 0.08);
+    --header-bg: rgba(11, 11, 26, 0.85);
+    --nav-bg: rgba(20, 20, 40, 0.9);
+    --modal-bg: rgba(20, 20, 45, 0.95);
+    --card-bg: rgba(255, 255, 255, 0.03);
+    --input-bg: rgba(255, 255, 255, 0.06);
+    --radius: 24px;
+    --radius-sm: 12px;
+    --radius-lg: 32px;
+    --transition: 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    --transition-fast: 0.2s cubic-bezier(0.23, 1, 0.32, 1);
+    --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+/* ---------- LIGHT THEME ---------- */
+[data-theme="light"] {
+    --bg: #f4f4ff;
+    --bg-gradient: linear-gradient(135deg, #f4f4ff 0%, #ede8ff 50%, #f8f8ff 100%);
+    --surface: rgba(255, 255, 255, 0.85);
+    --surface2: rgba(245, 245, 255, 0.95);
+    --text: #1a1a2e;
+    --text-secondary: #4a4a7a;
+    --text-muted: #8a8aaa;
+    --primary: #5a3ec8;
+    --primary-light: #7c5ce7;
+    --primary-dark: #4a2db5;
+    --primary-glow: 0 0 25px rgba(90, 62, 200, 0.3);
+    --primary-glow-intense: 0 0 50px rgba(90, 62, 200, 0.5);
+    --secondary: #8b5cf6;
+    --danger: #e74c3c;
+    --danger-glow: 0 0 15px rgba(231, 76, 60, 0.3);
+    --success: #27ae60;
+    --success-glow: 0 0 15px rgba(39, 174, 96, 0.3);
+    --warning: #d68910;
+    --border: rgba(0, 0, 0, 0.08);
+    --border-hover: rgba(0, 0, 0, 0.15);
+    --shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+    --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.12);
+    --glass-bg: rgba(0, 0, 0, 0.02);
+    --glass-bg-hover: rgba(0, 0, 0, 0.05);
+    --header-bg: rgba(244, 244, 255, 0.9);
+    --nav-bg: rgba(255, 255, 255, 0.9);
+    --modal-bg: rgba(255, 255, 255, 0.95);
+    --card-bg: rgba(0, 0, 0, 0.02);
+    --input-bg: rgba(0, 0, 0, 0.04);
+}
+
+/* ---------- COLOR PALETTE SWATCHES ---------- */
+[data-primary="purple"]  { --primary: #7c5ce7; --primary-light: #a78bfa; --primary-dark: #5a3ec8; }
+[data-primary="blue"]    { --primary: #3b82f6; --primary-light: #60a5fa; --primary-dark: #2563eb; }
+[data-primary="green"]   { --primary: #10b981; --primary-light: #34d399; --primary-dark: #059669; }
+[data-primary="orange"]  { --primary: #f59e0b; --primary-light: #fbbf24; --primary-dark: #d97706; }
+[data-primary="red"]     { --primary: #ef4444; --primary-light: #f87171; --primary-dark: #dc2626; }
+[data-primary="pink"]    { --primary: #ec4899; --primary-light: #f472b6; --primary-dark: #db2777; }
+[data-primary="indigo"]  { --primary: #6366f1; --primary-light: #818cf8; --primary-dark: #4f46e5; }
+[data-primary="teal"]    { --primary: #14b8a6; --primary-light: #2dd4bf; --primary-dark: #0d9488; }

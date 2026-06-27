@@ -1,0 +1,185 @@
+/* ============================================================
+   Fikr Timer · Clock Styles
+   Analog & digital clock, overlay, hands animation
+   ============================================================ */
+
+/* ---------- HEADER DIGITAL CLOCK ---------- */
+.digital-clock-small {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text);
+    letter-spacing: 0.5px;
+    font-family: var(--font-mono);
+    background: var(--glass-bg);
+    padding: 4px 10px;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+}
+
+/* ---------- HEADER ANALOG CLOCK ---------- */
+.analog-clock-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.analog-clock-svg {
+    width: 44px;
+    height: 44px;
+}
+
+.clock-face-bg {
+    fill: var(--surface2);
+    stroke: var(--border);
+    stroke-width: 1;
+}
+
+.clock-markers line {
+    stroke: var(--text-secondary);
+    opacity: 0.5;
+}
+
+.clock-hand {
+    stroke: var(--text);
+    stroke-linecap: round;
+    transform-origin: 22px 22px;
+}
+
+.hour-hand {
+    stroke-width: 2.5;
+    stroke: var(--primary);
+}
+
+.minute-hand {
+    stroke-width: 2;
+    stroke: var(--text);
+}
+
+.second-hand {
+    stroke-width: 1;
+    stroke: var(--danger);
+}
+
+.clock-center-dot {
+    fill: var(--danger);
+}
+
+/* ---------- CLOCK OVERLAY ---------- */
+.clock-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.9);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 250;
+    flex-direction: column;
+    animation: fadeIn 0.3s ease;
+}
+
+.close-overlay-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 2rem;
+    cursor: pointer;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all var(--transition);
+}
+
+.close-overlay-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: rotate(90deg);
+}
+
+.overlay-clock-content {
+    text-align: center;
+    color: white;
+}
+
+.big-digital-time {
+    font-size: clamp(4rem, 12vw, 8rem);
+    font-weight: 200;
+    letter-spacing: 4px;
+    font-family: var(--font-mono);
+    text-shadow: 0 0 40px var(--primary);
+    animation: glowPulse 3s infinite ease-in-out;
+}
+
+.big-digital-date {
+    font-size: 1.5rem;
+    opacity: 0.7;
+    margin: 10px 0 30px;
+}
+
+.big-analog-clock {
+    width: 160px;
+    height: 160px;
+    margin: 0 auto;
+}
+
+.big-analog-clock .hour-hand {
+    stroke-width: 4;
+}
+
+.big-analog-clock .minute-hand {
+    stroke-width: 3;
+}
+
+.big-analog-clock .second-hand {
+    stroke-width: 1.5;
+}
+
+/* ---------- TIMER CIRCLE PROGRESS ---------- */
+.timer-svg {
+    width: 100%;
+    height: 100%;
+    transform: rotate(-90deg);
+}
+
+.timer-bg-circle {
+    fill: none;
+    stroke: var(--border);
+    stroke-width: 8;
+}
+
+.timer-progress-circle {
+    fill: none;
+    stroke: var(--primary);
+    stroke-width: 8;
+    stroke-linecap: round;
+    transition: stroke-dashoffset 0.3s linear;
+    filter: drop-shadow(0 0 6px var(--primary));
+}
+
+/* ---------- TIMER DISPLAY ---------- */
+.timer-time {
+    font-size: 3rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    font-family: var(--font-mono);
+}
+
+.timer-label {
+    font-size: 1rem;
+    color: var(--text-secondary);
+}
+
+.breathing-phase-text {
+    font-size: 1.4rem;
+    font-weight: 300;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--primary);
+    animation: pulse 2s infinite ease-in-out;
+}
