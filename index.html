@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0, user-scalable=no">
+    <title>Fikr Timer · Pro</title>
+    <meta name="theme-color" content="#7c5ce7">
+    <meta name="description" content="Advanced focus & breathing timer with Pomodoro, analytics, soundscapes, and more.">
+    <link rel="manifest" href="manifest.json">
+
+    <!-- CSS Modules -->
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/themes.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/clock.css">
+
+    <!-- Preload key assets -->
+    <link rel="preload" href="js/app.js" as="script">
+</head>
+<body>
+    <!-- ========== HEADER ========== -->
+    <header class="app-header glass" id="appHeader">
+        <div class="header-left">
+            <span class="logo-icon pulse">⏳</span>
+            <h1 class="app-title gradient-text">Fikr Timer</h1>
+        </div>
+
+        <div class="header-center">
+            <!-- Digital Clock -->
+            <div class="digital-clock-small" id="digitalClockSmall" title="Current time">
+                <span class="clock-time-text">00:00:00</span>
+            </div>
+
+            <!-- Analog Clock -->
+            <div class="analog-clock-container" title="Analog clock">
+                <svg class="analog-clock-svg" viewBox="0 0 44 44" id="analogClock">
+                    <!-- Clock face -->
+                    <circle class="clock-face-bg" cx="22" cy="22" r="20"/>
+                    <!-- Hour markers -->
+                    <g class="clock-markers">
+                        <line x1="22" y1="4"  x2="22" y2="6"  stroke="var(--text-secondary)" stroke-width="1.5" stroke-linecap="round"/>
+                        <line x1="22" y1="38" x2="22" y2="40" stroke="var(--text-secondary)" stroke-width="1.5" stroke-linecap="round"/>
+                        <line x1="4"  y1="22" x2="6"  y2="22" stroke="var(--text-secondary)" stroke-width="1.5" stroke-linecap="round"/>
+                        <line x1="38" y1="22" x2="40" y2="22" stroke="var(--text-secondary)" stroke-width="1.5" stroke-linecap="round"/>
+                    </g>
+                    <!-- Hands -->
+                    <line class="clock-hand hour-hand" id="hourHand"   x1="22" y1="22" x2="22" y2="12"/>
+                    <line class="clock-hand minute-hand" id="minuteHand" x1="22" y1="22" x2="22" y2="8"/>
+                    <line class="clock-hand second-hand" id="secondHand" x1="22" y1="22" x2="22" y2="6"/>
+                    <!-- Center dot -->
+                    <circle class="clock-center-dot" cx="22" cy="22" r="2"/>
+                    <!-- Glass overlay -->
+                    <circle cx="22" cy="22" r="19" fill="none" stroke="var(--border)" stroke-width="0.5" opacity="0.5"/>
+                </svg>
+            </div>
+        </div>
+
+        <div class="header-right">
+            <button class="icon-btn" id="ambientBtn" title="Ambient Sound" aria-label="Toggle ambient sound">
+                <span class="btn-icon">🎧</span>
+            </button>
+            <button class="icon-btn" id="themeBtn" title="Toggle theme" aria-label="Switch dark/light mode">
+                <span class="btn-icon" id="themeIcon">🌙</span>
+            </button>
+            <button class="icon-btn" id="profileBtn" title="Profile" aria-label="View profile">
+                <span class="btn-icon">👤</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- ========== MAIN CONTENT AREA ========== -->
+    <main class="app-main" id="mainContent">
+        <!-- Views rendered dynamically by app.js -->
+    </main>
+
+    <!-- ========== FLOATING DIGITAL CLOCK OVERLAY ========== -->
+    <div class="clock-overlay hidden" id="clockOverlay">
+        <button class="close-overlay-btn" id="closeClockOverlay" aria-label="Close clock overlay">✕</button>
+        <div class="overlay-clock-content">
+            <div class="big-digital-time" id="bigDigitalTime">00:00:00</div>
+            <div class="big-digital-date" id="bigDigitalDate">Loading...</div>
+            <div class="big-analog-clock" id="bigAnalogClock">
+                <svg viewBox="0 0 200 200">
+                    <circle cx="100" cy="100" r="90" fill="none" stroke="var(--border)" stroke-width="3"/>
+                    <line class="clock-hand hour-hand" id="bigHourHand"   x1="100" y1="100" x2="100" y2="55"/>
+                    <line class="clock-hand minute-hand" id="bigMinuteHand" x1="100" y1="100" x2="100" y2="35"/>
+                    <line class="clock-hand second-hand" id="bigSecondHand" x1="100" y1="100" x2="100" y2="25"/>
+                    <circle cx="100" cy="100" r="6" fill="var(--danger)"/>
+                </svg>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== BOTTOM NAVIGATION ========== -->
+    <nav class="bottom-nav glass" id="bottomNav">
+        <button class="nav-item active" data-view="home" aria-label="Modes">
+            <span class="nav-icon">🏠</span>
+            <span class="nav-label">Modes</span>
+        </button>
+        <button class="nav-item" data-view="timer" aria-label="Timer">
+            <span class="nav-icon">⏱️</span>
+            <span class="nav-label">Timer</span>
+        </button>
+        <button class="nav-item" data-view="analytics" aria-label="Analytics">
+            <span class="nav-icon">📊</span>
+            <span class="nav-label">Stats</span>
+        </button>
+        <button class="nav-item" data-view="settings" aria-label="Settings">
+            <span class="nav-icon">⚙️</span>
+            <span class="nav-label">Settings</span>
+        </button>
+    </nav>
+
+    <!-- ========== MODAL CONTAINERS ========== -->
+    <div class="modal-overlay hidden" id="sessionSummaryModal">
+        <div class="modal-content card-3d">
+            <div class="modal-header">
+                <h2>🎉 Session Complete!</h2>
+            </div>
+            <div class="modal-body" id="summaryDetails"></div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" id="closeSummaryBtn">OK</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay hidden" id="customTimerModal">
+        <div class="modal-content card-3d">
+            <div class="modal-header">
+                <h2>⚙️ Custom Timer</h2>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="customTimerName">Timer Name</label>
+                    <input type="text" id="customTimerName" class="form-input" placeholder="e.g., Meditation">
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="customFocus">Focus (min)</label>
+                        <input type="number" id="customFocus" class="form-input" value="30" min="1" max="300">
+                    </div>
+                    <div class="form-group">
+                        <label for="customBreak">Break (min)</label>
+                        <input type="number" id="customBreak" class="form-input" value="5" min="0" max="60">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="customRounds">Rounds</label>
+                    <input type="number" id="customRounds" class="form-input" value="4" min="1" max="20">
+                </div>
+                <div class="form-group">
+                    <label for="customColor">Accent Color</label>
+                    <input type="color" id="customColor" class="form-input" value="#7c5ce7">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" id="cancelCustomBtn">Cancel</button>
+                <button class="btn btn-primary" id="startCustomBtn">Start Timer</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay hidden" id="breathingSetupModal">
+        <div class="modal-content card-3d">
+            <div class="modal-header">
+                <h2>🧘‍♀️ Breathing Setup</h2>
+            </div>
+            <div class="modal-body">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="breathingInhale">Inhale (s)</label>
+                        <input type="number" id="breathingInhale" class="form-input" value="4" min="1" max="30">
+                    </div>
+                    <div class="form-group">
+                        <label for="breathingHold">Hold (s)</label>
+                        <input type="number" id="breathingHold" class="form-input" value="4" min="0" max="30">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="breathingExhale">Exhale (s)</label>
+                        <input type="number" id="breathingExhale" class="form-input" value="4" min="1" max="30">
+                    </div>
+                    <div class="form-group">
+                        <label for="breathingHold2">Hold (s)</label>
+                        <input type="number" id="breathingHold2" class="form-input" value="4" min="0" max="30">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="breathingCycles">Cycles</label>
+                    <input type="number" id="breathingCycles" class="form-input" value="5" min="1" max="50">
+                </div>
+                <div class="preset-breathing">
+                    <span class="preset-label">Quick Presets:</span>
+                    <button class="btn btn-xs btn-outline preset-btn" data-preset="box">Box (4-4-4-4)</button>
+                    <button class="btn btn-xs btn-outline preset-btn" data-preset="478">4-7-8</button>
+                    <button class="btn btn-xs btn-outline preset-btn" data-preset="deep">Deep (5-5-5-5)</button>
+                    <button class="btn btn-xs btn-outline preset-btn" data-preset="wimhof">Wim Hof (30)</button>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" id="cancelBreathingBtn">Cancel</button>
+                <button class="btn btn-primary" id="startBreathingBtn">Start Breathing</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast notification container -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- ========== SCRIPTS ========== -->
+    <script type="module" src="js/app.js"></script>
+
+    <!-- Service Worker Registration -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js')
+                    .then(reg => console.log('✅ Service Worker registered'))
+                    .catch(err => console.warn('⚠️ Service Worker failed:', err));
+            });
+        }
+    </script>
+</body>
+
+</html>
